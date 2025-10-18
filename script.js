@@ -19,9 +19,9 @@ var spawnTimer = 0;
 var particles = [];
 var stars = [];
 
-// Canvas size
-var canvasWidth = 600;
-var canvasHeight = 800;
+// Canvas size - optimized for viewport
+var canvasWidth = 500;
+var canvasHeight = 650;
 
 // Preload images
 function preload() {
@@ -91,8 +91,8 @@ function setup() {
   // Create initial objects
   createFallingObject();
 
-  // Create more twinkling stars for bigger canvas
-  for (let i = 0; i < 100; i++) {
+  // Create twinkling stars
+  for (let i = 0; i < 80; i++) {
     stars.push({
       x: random(width),
       y: random(height),
@@ -491,67 +491,67 @@ function gameOver() {
   noFill();
   stroke(255, 0, 100);
   strokeWeight(3);
-  rect(width / 2 - 250, height / 2 - 200, 500, 400);
+  rect(width / 2 - 200, height / 2 - 180, 400, 360);
   stroke(0, 255, 255);
   strokeWeight(2);
-  rect(width / 2 - 245, height / 2 - 195, 490, 390);
+  rect(width / 2 - 195, height / 2 - 175, 390, 350);
   pop();
 
   textAlign(CENTER);
 
   // GAME OVER with neon effect
-  textSize(64);
+  textSize(52);
   fill(255, 0, 100);
   stroke(255, 0, 150);
-  strokeWeight(8);
-  text('GAME OVER', width / 2, height / 2 - 100);
+  strokeWeight(6);
+  text('GAME OVER', width / 2, height / 2 - 90);
 
   // Glitch overlay
   if (frameCount % 10 < 2) {
     push();
     fill(0, 255, 255);
     stroke(0, 255, 255);
-    strokeWeight(8);
-    text('GAME OVER', width / 2 + random(-5, 5), height / 2 - 100 + random(-5, 5));
+    strokeWeight(6);
+    text('GAME OVER', width / 2 + random(-5, 5), height / 2 - 90 + random(-5, 5));
     pop();
   }
 
   // Score display
-  textSize(32);
+  textSize(28);
   fill(0, 255, 255);
   stroke(0, 200, 255);
-  strokeWeight(4);
+  strokeWeight(3);
   text('SCORE: ' + score, width / 2, height / 2 - 30);
 
   // Coins
   fill(255, 215, 0);
   stroke(255, 255, 100);
   strokeWeight(3);
-  text('💰 ' + coinsCollected + ' COINS', width / 2, height / 2 + 20);
+  text('💰 ' + coinsCollected + ' COINS', width / 2, height / 2 + 10);
 
   // Dodged
   fill(255, 100, 0);
   stroke(255, 150, 50);
   strokeWeight(3);
-  text('🪨 ' + dodgeCount + ' DODGED', width / 2, height / 2 + 60);
+  text('🪨 ' + dodgeCount + ' DODGED', width / 2, height / 2 + 45);
 
   // New high score banner
   if (score === highScore && highScore > 0) {
     push();
     fill(255, 215, 0, sin(frameCount * 0.1) * 50 + 200);
     stroke(255, 255, 0);
-    strokeWeight(6);
-    textSize(40);
-    text('⚡ NEW RECORD! ⚡', width / 2, height / 2 + 110);
+    strokeWeight(5);
+    textSize(32);
+    text('⚡ NEW RECORD! ⚡', width / 2, height / 2 + 90);
     pop();
   }
 
   // Click to restart
-  textSize(22);
+  textSize(18);
   fill(200, 200, 255, sin(frameCount * 0.15) * 100 + 155);
   stroke(150, 150, 255);
-  strokeWeight(3);
-  text('CLICK TO RESTART', width / 2, height - 80);
+  strokeWeight(2);
+  text('CLICK TO RESTART', width / 2, height - 60);
 }
 
 // Play dodge sound using Web Audio API
